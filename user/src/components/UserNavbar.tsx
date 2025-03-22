@@ -6,8 +6,7 @@ import { MessageSquare } from "lucide-react";
 import Logo from "@/assets/Krushimart_logo.png";
 import Profile from "@/assets/Profile.jpg";
 
-
-export default function FarmerNav() {
+export default function UserNav() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -48,26 +47,34 @@ export default function FarmerNav() {
           <ul className="flex space-x-16">
             <li>
               <Link
-                href="/dashboard"
-                className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
-              >
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/marketplace"
                 className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
               >
-                Sell Crop
+                Market Place
               </Link>
             </li>
             <li>
               <Link
-                href="/about"
+                href="/orderhistory"
                 className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
               >
-                Crop Health Diagnosis
+                Order History
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/wishlist"
+                className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
+              >
+                Wishlist
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/cart"
+                className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
+              >
+                Shopping Cart
               </Link>
             </li>
           </ul>
@@ -87,7 +94,7 @@ export default function FarmerNav() {
               onClick={() => setIsProfileOpen(!isProfileOpen)}
             >
               <Image
-                src= {Profile} // Replace with actual profile image path
+                src={Profile} // Replace with actual profile image path
                 alt="Profile"
                 width={40}
                 height={40}
