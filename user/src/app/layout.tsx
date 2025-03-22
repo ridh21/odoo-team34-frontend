@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "sonner"
 
 
 
@@ -34,7 +34,7 @@ export default function RootLayout({
         className={`${instrumentSans.variable} ${robotoFlex.variable} bg-[#FAFAFA] antialiased`}
       >
         <NextTopLoader height={3} color="#1565C0" showSpinner={false} />
-        <Toaster position="top-right" />
+        <Toaster  />
         {children}
       </body>
     </html>

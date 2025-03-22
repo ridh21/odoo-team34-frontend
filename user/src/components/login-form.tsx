@@ -21,47 +21,68 @@ export function LoginForm() {
   // Handle login
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (!mobileNumber || mobileNumber.length !== 10) {
       toast.error("Please enter a valid 10-digit mobile number");
       return;
     }
-
+  
     if (!password) {
       toast.error("Please enter your password");
       return;
     }
-
+  
     setIsLoading(true);
-
+  
     try {
+      console.log("Sending login request...");
+      console.log("Login payload:", { mobileNumber, password });
+  
       const response = await axios.post(`http://localhost:8000/api/auth/login`, {
         mobileNumber,
         password,
       });
-
+  
+      console.log("Login response:", response.data);
+  
       if (response.data.success) {
+        // Store the token in localStorage
+        localStorage.setItem("authToken", response.data.token);
+      
+        // Store user information in localStorage
         localStorage.setItem(
           "userInfo",
           JSON.stringify({
             userId: response.data.user.id,
             name: response.data.user.name,
             mobileNumber: response.data.user.mobileNumber,
+            email: response.data.user.email,
+            longitude: response.data.user.longitude,
+            latitude: response.data.user.latitude,
+            state: response.data.user.state,
+            city: response.data.user.city,
+            coins: response.data.user.coins,
+            pincode: response.data.user.pincode,
           })
         );
+      
+        console.log("Token stored:", localStorage.getItem("authToken"));
+        console.log("User info stored:", localStorage.getItem("userInfo"));
+      
         toast.success("Login successful!");
-        router.push("/dashboard");
+        router.push("/marketplace");
       } else {
         toast.error("Invalid credentials");
       }
     } catch (error: any) {
       console.error("Error during login:", error);
+      console.error("Error response:", error.response);
       toast.error(error.response?.data?.message || "Login failed");
     } finally {
       setIsLoading(false);
     }
   };
-
+            
   return (
     <div className={cn("flex flex-col items-center justify-center w-full min-h-screen p-6")}>
       <div className="flex flex-col md:flex-row items-center justify-center gap-12 bg-white p-18 rounded-xl max-w-7xl w-full shadow-lg">

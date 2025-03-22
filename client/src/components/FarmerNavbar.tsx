@@ -64,7 +64,7 @@ export default function FarmerNav() {
             </li>
             <li>
               <Link
-                href="/about"
+                href="/crophealth"
                 className="text-gray-700 text-xl transition-colors duration-300 ease-in-out hover:text-green-700 hover:font-semibold"
               >
                 Crop Health Diagnosis
