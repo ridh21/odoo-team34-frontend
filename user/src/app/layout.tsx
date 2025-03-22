@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner"
 
 
 const instrumentSans = Instrument_Sans({
