@@ -73,7 +73,7 @@ const MySwiper = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-             Promoting transparency, sustainability, and fair trade in natural farming
+            Promoting transparency, sustainability, and fair trade in natural farming
             </motion.p>
           </div>
         </div>
