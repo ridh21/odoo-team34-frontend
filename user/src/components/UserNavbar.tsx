@@ -83,9 +83,11 @@ export default function UserNav() {
         {/* Profile & Message Section */}
         <div className="flex items-center space-x-6">
           {/* Chat Button */}
+          <Link href="/user/chat" className="relative">
           <button className="relative bg-green-700 text-white p-2 rounded-full transition-all duration-300 ease-in-out hover:bg-green-800">
             <MessageSquare className="w-6 h-6" />
           </button>
+          </Link>
 
           {/* Profile Button */}
           <div className="relative" ref={profileRef}>

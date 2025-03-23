@@ -3,6 +3,7 @@ import { Instrument_Sans, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "@/components/ui/sonner";
+import ChatbaseBot from "@/components/chatBaseBot";
 
 
 const instrumentSans = Instrument_Sans({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <NextTopLoader height={3} color="#1565C0" showSpinner={false} />
         <Toaster/>
         {children}
+        <ChatbaseBot/>
       </body>
     </html>
   );

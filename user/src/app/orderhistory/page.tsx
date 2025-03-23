@@ -287,7 +287,10 @@ const OrderHistory = () => {
     <div className="min-h-screen bg-gray-50">
       <UserNav />
 
+      
+
       <div className="max-w-7xl mx-auto px-4 py-10">
+        
         <div className="flex items-center mb-8">
           <FaBoxOpen className="text-green-600 text-3xl mr-4" />
           <h1 className="text-3xl font-bold text-gray-800">Order History</h1>
@@ -308,6 +311,8 @@ const OrderHistory = () => {
                 className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
             </div>
+
+            
 
             <div className="flex flex-col sm:flex-row gap-4">
               <select
@@ -336,12 +341,74 @@ const OrderHistory = () => {
           </div>
         </div>
 
+          {/* Order Stats */}
+          {!isLoading && filteredAndSortedOrders.length > 0 && (
+          <div className="mt-12 bg-white rounded-xl shadow-sm p-6">
+            <h2 className="text-lg font-semibold text-gray-800 mb-6">Order Summary</h2>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div className="bg-green-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                    <FaBoxOpen />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-gray-500">Total Orders</p>
+                    <p className="text-xl font-semibold text-gray-800">{orders.length}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                    <FaTruck />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-gray-500">In Transit</p>
+                    <p className="text-xl font-semibold text-gray-800">
+                      {orders.filter(order => order.status === "in-transit").length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                    <FaCheckCircle />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-gray-500">Delivered</p>
+                    <p className="text-xl font-semibold text-gray-800">
+                      {orders.filter(order => order.status === "delivered").length}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-purple-50 rounded-lg p-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                    <FaRupeeSign />
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-sm text-gray-500">Total Spent</p>
+                    <p className="text-xl font-semibold text-gray-800">
+                      ₹{orders.reduce((total, order) => total + order.total, 0).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Order List */}
         {isLoading ? (
           // Loading skeleton
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {[...Array(3)].map((_, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse ">
                 <div className="p-6">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className="space-y-3">
@@ -387,7 +454,7 @@ const OrderHistory = () => {
           </div>
         ) : (
           // Order list
-          <div className="space-y-6">
+          <div className="space-y-6 mt-10">
             <AnimatePresence>
               {filteredAndSortedOrders.map((order) => (
 				<motion.div
@@ -400,7 +467,7 @@ const OrderHistory = () => {
                   className="bg-white rounded-xl shadow-sm overflow-hidden"
                 >
                   {/* Order Header */}
-                  <div className="p-6 border-b border-gray-100">
+                  <div className="p-6 border-b border-gray-100 ">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                       <div>
                         <div className="flex items-center">
@@ -416,7 +483,7 @@ const OrderHistory = () => {
                         </p>
                       </div>
 
-                      <div className="flex flex-col sm:items-end">
+                      <div className="flex flex-col sm:items-end ">
                         <div className="flex items-center text-green-600 font-semibold">
                           <FaRupeeSign className="text-xs mr-1" />
                           <span>{order.total.toLocaleString()}</span>
@@ -743,67 +810,7 @@ const OrderHistory = () => {
           )}
         </AnimatePresence>
 
-        {/* Order Stats */}
-        {!isLoading && filteredAndSortedOrders.length > 0 && (
-          <div className="mt-12 bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-6">Order Summary</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="bg-green-50 rounded-lg p-4">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                    <FaBoxOpen />
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm text-gray-500">Total Orders</p>
-                    <p className="text-xl font-semibold text-gray-800">{orders.length}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-blue-50 rounded-lg p-4">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                    <FaTruck />
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm text-gray-500">In Transit</p>
-                    <p className="text-xl font-semibold text-gray-800">
-                      {orders.filter(order => order.status === "in-transit").length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-yellow-50 rounded-lg p-4">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
-                    <FaCheckCircle />
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm text-gray-500">Delivered</p>
-                    <p className="text-xl font-semibold text-gray-800">
-                      {orders.filter(order => order.status === "delivered").length}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-purple-50 rounded-lg p-4">
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
-                    <FaRupeeSign />
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm text-gray-500">Total Spent</p>
-                    <p className="text-xl font-semibold text-gray-800">
-                      ₹{orders.reduce((total, order) => total + order.total, 0).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+      
 
         {/* Need Help Section */}
         <div className="mt-8 bg-white rounded-xl shadow-sm p-6">
